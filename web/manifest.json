@@ -1,11 +1,11 @@
 {
-    "name": "flutter_traffic_light",
-    "short_name": "flutter_traffic_light",
+    "name": "信号機シミュレーター",
+    "short_name": "信号機シミュレーター",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Flutter における「状態」を解説するためのサンプル。Riverpod を利用しています。",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
