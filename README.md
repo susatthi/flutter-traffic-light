@@ -1,16 +1,13 @@
-# flutter_traffic_light
+# 信号機シミュレーター
 
-A new Flutter project.
+Flutter における「状態」を解説するためのサンプル。Riverpod を利用しています。
 
-## Getting Started
+<img src="https://github.com/susatthi/flutter-traffic-light/assets/13707135/47962b8c-6eaf-4e73-9f97-254c1baec6db" width=300>
 
-This project is a starting point for a Flutter application.
+## デモサイト
 
-A few resources to get you started if this is your first Flutter project:
+https://susatthi.github.io/flutter-traffic-light/
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## License
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+MIT
