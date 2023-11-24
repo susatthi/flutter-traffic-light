@@ -18,8 +18,8 @@ class TrafficLight extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             SizedBox(
-              height: 400,
-              width: 200,
+              height: 360,
+              width: 180,
               child: _TrafficLight(
                 state: state,
                 iconSize: 150,
@@ -28,7 +28,7 @@ class TrafficLight extends StatelessWidget {
             const Gap(8),
             SizedBox(
               width: 80,
-              height: 200,
+              height: 180,
               child: _RemainingSignage(
                 // 黄色の場合は残り時間を表示しない。
                 remainingTime: state.currentStatus == TrafficLightStatus.yellow

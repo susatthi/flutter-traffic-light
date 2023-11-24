@@ -78,6 +78,10 @@ class TrafficLightStateNotifier extends _$TrafficLightStateNotifier {
         elapsedTime: 0,
         remainingTime: _getStayingTime(nextStatus),
       );
+      return;
     }
+
+    // 上記以外であればエラーを返す。
+    throw Exception();
   }
 }

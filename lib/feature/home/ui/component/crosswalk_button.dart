@@ -14,7 +14,7 @@ class CrosswalkButton extends StatelessWidget {
     return ColoredBox(
       color: const Color(0xFFFFD444),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             Text(
@@ -47,10 +47,13 @@ class _Button extends ConsumerWidget {
       next.when(
         data: (_) {},
         error: (e, s) {
-          ref
-              .read(scaffoldMessengerProvider)
-              .currentState
-              ?.showSnackBar(const SnackBar(content: Text('エラーが発生しました')));
+          ref.read(scaffoldMessengerProvider).currentState?.showSnackBar(
+                const SnackBar(
+                  content: Text('青にできませんでした。'),
+                  duration: Duration(seconds: 2),
+                  width: 300,
+                ),
+              );
         },
         loading: () {},
       );
