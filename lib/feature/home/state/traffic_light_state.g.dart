@@ -7,7 +7,7 @@ part of 'traffic_light_state.dart';
 // **************************************************************************
 
 String _$trafficLightStateNotifierHash() =>
-    r'eb01485a61ce35b4f36d901b8e5878b69ce14666';
+    r'a713dcd9025e42b9e1b0acdce9a943f9a1f0ae7e';
 
 /// See also [TrafficLightStateNotifier].
 @ProviderFor(TrafficLightStateNotifier)

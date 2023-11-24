@@ -28,8 +28,8 @@ class _Body extends StatelessWidget {
             builder: (state) {
               return Column(
                 children: [
-                  Text(state.status.name),
-                  Text('${state.remainingSeconds}'),
+                  Text(state.currentStatus.name),
+                  Text('${state.remainingTime}'),
                 ],
               );
             },

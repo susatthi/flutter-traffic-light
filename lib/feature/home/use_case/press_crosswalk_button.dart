@@ -20,7 +20,7 @@ class PressCrosswalkButtonUseCase extends _$PressCrosswalkButtonUseCase {
     state = await AsyncValue.guard(() async {
       await ref
           .read(trafficLightStateNotifierProvider.notifier)
-          .pressPedestrianButton();
+          .updateStatus(TrafficLightStatus.green);
     });
   }
 }

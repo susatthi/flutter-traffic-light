@@ -7,26 +7,24 @@ part 'traffic_light_state.g.dart';
 @freezed
 class TrafficLightState with _$TrafficLightState {
   const factory TrafficLightState({
-    @Default(TrafficLightStatus.red) TrafficLightStatus status,
-    @Default(0) int elapsedSeconds,
-  }) = _TrafficLightState;
-  const TrafficLightState._();
+    /// 現在の信号機の状態
+    @Default(TrafficLightStatus.green) TrafficLightStatus currentStatus,
 
-  int get remainingSeconds => status.periodSeconds - elapsedSeconds;
+    /// 現在の信号機の状態が始まってからの経過時間
+    @Default(0) int elapsedTime,
+
+    /// 現在の信号機の状態の残り時間
+    @Default(0) int remainingTime,
+  }) = _TrafficLightState;
 }
 
 enum TrafficLightStatus {
-  red(periodSeconds: 10),
-  yellow(periodSeconds: 3),
-  green(periodSeconds: 8),
+  red,
+  yellow,
+  green,
   ;
 
-  const TrafficLightStatus({
-    required this.periodSeconds,
-  });
-
-  final int periodSeconds;
-
+  /// 次の信号機の状態を返す。
   TrafficLightStatus get next => switch (this) {
         TrafficLightStatus.red => TrafficLightStatus.green,
         TrafficLightStatus.yellow => TrafficLightStatus.red,
@@ -43,28 +41,42 @@ class TrafficLightStateNotifier extends _$TrafficLightStateNotifier {
 
   /// 時間を進める。
   void tick() {
-    final elapsedSeconds = state.elapsedSeconds + 1;
-    if (elapsedSeconds >= state.status.periodSeconds) {
+    final elapsedTime = state.elapsedTime + 1;
+    final remainingTime = _getStayingTime(state.currentStatus) - elapsedTime;
+    if (remainingTime <= 0) {
+      final nextStatus = state.currentStatus.next;
       state = state.copyWith(
-        status: state.status.next,
-        elapsedSeconds: 0,
+        currentStatus: nextStatus,
+        elapsedTime: 0,
+        remainingTime: _getStayingTime(nextStatus),
       );
     } else {
       state = state.copyWith(
-        elapsedSeconds: elapsedSeconds,
+        elapsedTime: elapsedTime,
+        remainingTime: remainingTime,
       );
     }
   }
 
-  /// 歩行ボタンを押した。
-  ///
-  /// 1秒間待ったあと、赤信号なら青信号に変える。それ以外は何もしない。
-  Future<void> pressPedestrianButton() async {
+  /// 信号機の状態ごとの滞在時間を返す。
+  static int _getStayingTime(TrafficLightStatus status) => switch (status) {
+        TrafficLightStatus.red => 10,
+        TrafficLightStatus.yellow => 3,
+        TrafficLightStatus.green => 8,
+      };
+
+  /// 強制的に信号機の状態を変える。
+  Future<void> updateStatus(TrafficLightStatus nextStatus) async {
+    // 非同期処理にしたいので1秒待つ。
     await Future<void>.delayed(const Duration(seconds: 1));
-    if (state.status == TrafficLightStatus.red) {
+
+    // 赤信号 => 青信号
+    if (state.currentStatus == TrafficLightStatus.red &&
+        nextStatus == TrafficLightStatus.green) {
       state = state.copyWith(
-        status: TrafficLightStatus.green,
-        elapsedSeconds: 0,
+        currentStatus: nextStatus,
+        elapsedTime: 0,
+        remainingTime: _getStayingTime(nextStatus),
       );
     }
   }

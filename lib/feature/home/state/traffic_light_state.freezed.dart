@@ -16,8 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TrafficLightState {
-  TrafficLightStatus get status => throw _privateConstructorUsedError;
-  int get elapsedSeconds => throw _privateConstructorUsedError;
+  /// 現在の信号機の状態
+  TrafficLightStatus get currentStatus => throw _privateConstructorUsedError;
+
+  /// 現在の信号機の状態が始まってからの経過時間
+  int get elapsedTime => throw _privateConstructorUsedError;
+
+  /// 現在の信号機の状態の残り時間
+  int get remainingTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TrafficLightStateCopyWith<TrafficLightState> get copyWith =>
@@ -30,7 +36,8 @@ abstract class $TrafficLightStateCopyWith<$Res> {
           TrafficLightState value, $Res Function(TrafficLightState) then) =
       _$TrafficLightStateCopyWithImpl<$Res, TrafficLightState>;
   @useResult
-  $Res call({TrafficLightStatus status, int elapsedSeconds});
+  $Res call(
+      {TrafficLightStatus currentStatus, int elapsedTime, int remainingTime});
 }
 
 /// @nodoc
@@ -46,17 +53,22 @@ class _$TrafficLightStateCopyWithImpl<$Res, $Val extends TrafficLightState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
-    Object? elapsedSeconds = null,
+    Object? currentStatus = null,
+    Object? elapsedTime = null,
+    Object? remainingTime = null,
   }) {
     return _then(_value.copyWith(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
+      currentStatus: null == currentStatus
+          ? _value.currentStatus
+          : currentStatus // ignore: cast_nullable_to_non_nullable
               as TrafficLightStatus,
-      elapsedSeconds: null == elapsedSeconds
-          ? _value.elapsedSeconds
-          : elapsedSeconds // ignore: cast_nullable_to_non_nullable
+      elapsedTime: null == elapsedTime
+          ? _value.elapsedTime
+          : elapsedTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      remainingTime: null == remainingTime
+          ? _value.remainingTime
+          : remainingTime // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -70,7 +82,8 @@ abstract class _$$TrafficLightStateImplCopyWith<$Res>
       __$$TrafficLightStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TrafficLightStatus status, int elapsedSeconds});
+  $Res call(
+      {TrafficLightStatus currentStatus, int elapsedTime, int remainingTime});
 }
 
 /// @nodoc
@@ -84,17 +97,22 @@ class __$$TrafficLightStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
-    Object? elapsedSeconds = null,
+    Object? currentStatus = null,
+    Object? elapsedTime = null,
+    Object? remainingTime = null,
   }) {
     return _then(_$TrafficLightStateImpl(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
+      currentStatus: null == currentStatus
+          ? _value.currentStatus
+          : currentStatus // ignore: cast_nullable_to_non_nullable
               as TrafficLightStatus,
-      elapsedSeconds: null == elapsedSeconds
-          ? _value.elapsedSeconds
-          : elapsedSeconds // ignore: cast_nullable_to_non_nullable
+      elapsedTime: null == elapsedTime
+          ? _value.elapsedTime
+          : elapsedTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      remainingTime: null == remainingTime
+          ? _value.remainingTime
+          : remainingTime // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -102,21 +120,30 @@ class __$$TrafficLightStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TrafficLightStateImpl extends _TrafficLightState {
+class _$TrafficLightStateImpl implements _TrafficLightState {
   const _$TrafficLightStateImpl(
-      {this.status = TrafficLightStatus.red, this.elapsedSeconds = 0})
-      : super._();
+      {this.currentStatus = TrafficLightStatus.green,
+      this.elapsedTime = 0,
+      this.remainingTime = 0});
 
+  /// 現在の信号機の状態
   @override
   @JsonKey()
-  final TrafficLightStatus status;
+  final TrafficLightStatus currentStatus;
+
+  /// 現在の信号機の状態が始まってからの経過時間
   @override
   @JsonKey()
-  final int elapsedSeconds;
+  final int elapsedTime;
+
+  /// 現在の信号機の状態の残り時間
+  @override
+  @JsonKey()
+  final int remainingTime;
 
   @override
   String toString() {
-    return 'TrafficLightState(status: $status, elapsedSeconds: $elapsedSeconds)';
+    return 'TrafficLightState(currentStatus: $currentStatus, elapsedTime: $elapsedTime, remainingTime: $remainingTime)';
   }
 
   @override
@@ -124,13 +151,17 @@ class _$TrafficLightStateImpl extends _TrafficLightState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TrafficLightStateImpl &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.elapsedSeconds, elapsedSeconds) ||
-                other.elapsedSeconds == elapsedSeconds));
+            (identical(other.currentStatus, currentStatus) ||
+                other.currentStatus == currentStatus) &&
+            (identical(other.elapsedTime, elapsedTime) ||
+                other.elapsedTime == elapsedTime) &&
+            (identical(other.remainingTime, remainingTime) ||
+                other.remainingTime == remainingTime));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, elapsedSeconds);
+  int get hashCode =>
+      Object.hash(runtimeType, currentStatus, elapsedTime, remainingTime);
 
   @JsonKey(ignore: true)
   @override
@@ -140,16 +171,24 @@ class _$TrafficLightStateImpl extends _TrafficLightState {
           this, _$identity);
 }
 
-abstract class _TrafficLightState extends TrafficLightState {
+abstract class _TrafficLightState implements TrafficLightState {
   const factory _TrafficLightState(
-      {final TrafficLightStatus status,
-      final int elapsedSeconds}) = _$TrafficLightStateImpl;
-  const _TrafficLightState._() : super._();
+      {final TrafficLightStatus currentStatus,
+      final int elapsedTime,
+      final int remainingTime}) = _$TrafficLightStateImpl;
 
   @override
-  TrafficLightStatus get status;
+
+  /// 現在の信号機の状態
+  TrafficLightStatus get currentStatus;
   @override
-  int get elapsedSeconds;
+
+  /// 現在の信号機の状態が始まってからの経過時間
+  int get elapsedTime;
+  @override
+
+  /// 現在の信号機の状態の残り時間
+  int get remainingTime;
   @override
   @JsonKey(ignore: true)
   _$$TrafficLightStateImplCopyWith<_$TrafficLightStateImpl> get copyWith =>

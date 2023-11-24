@@ -7,7 +7,7 @@ part of 'press_crosswalk_button.dart';
 // **************************************************************************
 
 String _$pressCrosswalkButtonUseCaseHash() =>
-    r'a1bc6d9f1107bbf667d8d334b0957b693e95d799';
+    r'5f2d94a9e9b28daa38ed8268d6e88dc767cdd24d';
 
 /// See also [PressCrosswalkButtonUseCase].
 @ProviderFor(PressCrosswalkButtonUseCase)
