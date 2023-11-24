@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import 'component/crosswalk_button.dart';
 import 'component/traffic_light.dart';
@@ -25,7 +26,7 @@ class _Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TrafficLight(),
-          SizedBox(height: 16),
+          Gap(32),
           CrosswalkButton(),
         ],
       ),
