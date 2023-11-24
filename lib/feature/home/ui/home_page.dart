@@ -20,22 +20,13 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TrafficLightBuilder(
-            builder: (state) {
-              return Column(
-                children: [
-                  Text(state.currentStatus.name),
-                  Text('${state.remainingTime}'),
-                ],
-              );
-            },
-          ),
-          const SizedBox(height: 16),
-          const CrosswalkButton(),
+          TrafficLight(),
+          SizedBox(height: 16),
+          CrosswalkButton(),
         ],
       ),
     );
