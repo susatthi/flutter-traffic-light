@@ -7,13 +7,26 @@ environment:
   sdk: '>=3.1.5 <4.0.0'
 
 dependencies:
-  cupertino_icons: ^1.0.2
+  collection:
+  cupertino_icons:
   flutter:
     sdk: flutter
+  flutter_riverpod:
+  freezed_annotation:
+  gap:
+  riverpod_annotation:
+  roggle:
+
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  build_runner:
+  custom_lint:
+  flutter_gen_runner:
   flutter_test:
     sdk: flutter
+  freezed:
+  pedantic_mono:
+  riverpod_generator:
+  riverpod_lint:
 
 flutter:
   uses-material-design: true
