@@ -12,6 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod:
+  flutter_web_plugins:
+    sdk: flutter
   freezed_annotation:
   gap:
   riverpod_annotation:
