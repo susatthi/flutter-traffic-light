@@ -8,13 +8,13 @@ part 'traffic_light_state.g.dart';
 class TrafficLightState with _$TrafficLightState {
   const factory TrafficLightState({
     /// 現在の信号機の状態
-    @Default(TrafficLightStatus.green) TrafficLightStatus currentStatus,
+    required TrafficLightStatus status,
 
     /// 現在の信号機の状態が始まってからの経過時間
     @Default(0) int elapsedTime,
 
     /// 現在の信号機の状態の残り時間
-    @Default(0) int remainingTime,
+    required int remainingTime,
   }) = _TrafficLightState;
 }
 
@@ -36,17 +36,21 @@ enum TrafficLightStatus {
 class TrafficLightStateNotifier extends _$TrafficLightStateNotifier {
   @override
   TrafficLightState build() {
-    return const TrafficLightState();
+    const status = TrafficLightStatus.green;
+    return TrafficLightState(
+      status: status,
+      remainingTime: _getStayingTime(status),
+    );
   }
 
   /// 時間を進める。
   void tick() {
     final elapsedTime = state.elapsedTime + 1;
-    final remainingTime = _getStayingTime(state.currentStatus) - elapsedTime;
+    final remainingTime = _getStayingTime(state.status) - elapsedTime;
     if (remainingTime <= 0) {
-      final nextStatus = state.currentStatus.next;
+      final nextStatus = state.status.next;
       state = state.copyWith(
-        currentStatus: nextStatus,
+        status: nextStatus,
         elapsedTime: 0,
         remainingTime: _getStayingTime(nextStatus),
       );
@@ -71,10 +75,10 @@ class TrafficLightStateNotifier extends _$TrafficLightStateNotifier {
     await Future<void>.delayed(const Duration(seconds: 1));
 
     // 赤信号 => 青信号
-    if (state.currentStatus == TrafficLightStatus.red &&
+    if (state.status == TrafficLightStatus.red &&
         nextStatus == TrafficLightStatus.green) {
       state = state.copyWith(
-        currentStatus: nextStatus,
+        status: nextStatus,
         elapsedTime: 0,
         remainingTime: _getStayingTime(nextStatus),
       );

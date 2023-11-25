@@ -31,7 +31,7 @@ class TrafficLight extends StatelessWidget {
               height: 180,
               child: _RemainingSignage(
                 // 黄色の場合は残り時間を表示しない。
-                remainingTime: state.currentStatus == TrafficLightStatus.yellow
+                remainingTime: state.status == TrafficLightStatus.yellow
                     ? 0
                     : state.remainingTime,
               ),
@@ -54,7 +54,7 @@ class _TrafficLight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return switch (state.currentStatus) {
+    return switch (state.status) {
       TrafficLightStatus.red => Column(
           children: [
             _RedLightOn(
