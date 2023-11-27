@@ -10,9 +10,6 @@ class TrafficLightState with _$TrafficLightState {
     /// 現在の信号機の状態
     required TrafficLightStatus status,
 
-    /// 現在の信号機の状態が始まってからの経過時間
-    @Default(0) int elapsedTime,
-
     /// 現在の信号機の状態の残り時間
     required int remainingTime,
   }) = _TrafficLightState;
@@ -45,18 +42,15 @@ class TrafficLightStateNotifier extends _$TrafficLightStateNotifier {
 
   /// 時間を進める。
   void tick() {
-    final elapsedTime = state.elapsedTime + 1;
-    final remainingTime = _getStayingTime(state.status) - elapsedTime;
+    final remainingTime = state.remainingTime - 1;
     if (remainingTime <= 0) {
       final nextStatus = state.status.next;
       state = state.copyWith(
         status: nextStatus,
-        elapsedTime: 0,
         remainingTime: _getStayingTime(nextStatus),
       );
     } else {
       state = state.copyWith(
-        elapsedTime: elapsedTime,
         remainingTime: remainingTime,
       );
     }
@@ -79,7 +73,6 @@ class TrafficLightStateNotifier extends _$TrafficLightStateNotifier {
         nextStatus == TrafficLightStatus.green) {
       state = state.copyWith(
         status: nextStatus,
-        elapsedTime: 0,
         remainingTime: _getStayingTime(nextStatus),
       );
       return;

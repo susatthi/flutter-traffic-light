@@ -19,9 +19,6 @@ mixin _$TrafficLightState {
   /// 現在の信号機の状態
   TrafficLightStatus get status => throw _privateConstructorUsedError;
 
-  /// 現在の信号機の状態が始まってからの経過時間
-  int get elapsedTime => throw _privateConstructorUsedError;
-
   /// 現在の信号機の状態の残り時間
   int get remainingTime => throw _privateConstructorUsedError;
 
@@ -36,7 +33,7 @@ abstract class $TrafficLightStateCopyWith<$Res> {
           TrafficLightState value, $Res Function(TrafficLightState) then) =
       _$TrafficLightStateCopyWithImpl<$Res, TrafficLightState>;
   @useResult
-  $Res call({TrafficLightStatus status, int elapsedTime, int remainingTime});
+  $Res call({TrafficLightStatus status, int remainingTime});
 }
 
 /// @nodoc
@@ -53,7 +50,6 @@ class _$TrafficLightStateCopyWithImpl<$Res, $Val extends TrafficLightState>
   @override
   $Res call({
     Object? status = null,
-    Object? elapsedTime = null,
     Object? remainingTime = null,
   }) {
     return _then(_value.copyWith(
@@ -61,10 +57,6 @@ class _$TrafficLightStateCopyWithImpl<$Res, $Val extends TrafficLightState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TrafficLightStatus,
-      elapsedTime: null == elapsedTime
-          ? _value.elapsedTime
-          : elapsedTime // ignore: cast_nullable_to_non_nullable
-              as int,
       remainingTime: null == remainingTime
           ? _value.remainingTime
           : remainingTime // ignore: cast_nullable_to_non_nullable
@@ -81,7 +73,7 @@ abstract class _$$TrafficLightStateImplCopyWith<$Res>
       __$$TrafficLightStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TrafficLightStatus status, int elapsedTime, int remainingTime});
+  $Res call({TrafficLightStatus status, int remainingTime});
 }
 
 /// @nodoc
@@ -96,7 +88,6 @@ class __$$TrafficLightStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? elapsedTime = null,
     Object? remainingTime = null,
   }) {
     return _then(_$TrafficLightStateImpl(
@@ -104,10 +95,6 @@ class __$$TrafficLightStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as TrafficLightStatus,
-      elapsedTime: null == elapsedTime
-          ? _value.elapsedTime
-          : elapsedTime // ignore: cast_nullable_to_non_nullable
-              as int,
       remainingTime: null == remainingTime
           ? _value.remainingTime
           : remainingTime // ignore: cast_nullable_to_non_nullable
@@ -120,18 +107,11 @@ class __$$TrafficLightStateImplCopyWithImpl<$Res>
 
 class _$TrafficLightStateImpl implements _TrafficLightState {
   const _$TrafficLightStateImpl(
-      {required this.status,
-      this.elapsedTime = 0,
-      required this.remainingTime});
+      {required this.status, required this.remainingTime});
 
   /// 現在の信号機の状態
   @override
   final TrafficLightStatus status;
-
-  /// 現在の信号機の状態が始まってからの経過時間
-  @override
-  @JsonKey()
-  final int elapsedTime;
 
   /// 現在の信号機の状態の残り時間
   @override
@@ -139,7 +119,7 @@ class _$TrafficLightStateImpl implements _TrafficLightState {
 
   @override
   String toString() {
-    return 'TrafficLightState(status: $status, elapsedTime: $elapsedTime, remainingTime: $remainingTime)';
+    return 'TrafficLightState(status: $status, remainingTime: $remainingTime)';
   }
 
   @override
@@ -148,15 +128,12 @@ class _$TrafficLightStateImpl implements _TrafficLightState {
         (other.runtimeType == runtimeType &&
             other is _$TrafficLightStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.elapsedTime, elapsedTime) ||
-                other.elapsedTime == elapsedTime) &&
             (identical(other.remainingTime, remainingTime) ||
                 other.remainingTime == remainingTime));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, elapsedTime, remainingTime);
+  int get hashCode => Object.hash(runtimeType, status, remainingTime);
 
   @JsonKey(ignore: true)
   @override
@@ -169,17 +146,12 @@ class _$TrafficLightStateImpl implements _TrafficLightState {
 abstract class _TrafficLightState implements TrafficLightState {
   const factory _TrafficLightState(
       {required final TrafficLightStatus status,
-      final int elapsedTime,
       required final int remainingTime}) = _$TrafficLightStateImpl;
 
   @override
 
   /// 現在の信号機の状態
   TrafficLightStatus get status;
-  @override
-
-  /// 現在の信号機の状態が始まってからの経過時間
-  int get elapsedTime;
   @override
 
   /// 現在の信号機の状態の残り時間
